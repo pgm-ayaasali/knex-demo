@@ -6,8 +6,13 @@
 
 import menuItems from "../data/navigation.js";
 import userData from "../data/user.js";
+import NavigationItem from "../models/NavigationItem.js";
+import { User } from "../models/User.js";
 
 export const home = async (req, res) => {
+  const menuItems = await NavigationItem.query();
+  const user = await User.query().findById(1);
+
   const pageData = {
     title: "Home",
     content: `
@@ -20,6 +25,7 @@ export const home = async (req, res) => {
     ...pageData,
     userData,
     menuItems,
+    user,
   });
 };
 
